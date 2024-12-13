@@ -1,10 +1,11 @@
 package com.example.Entries_Project.mapper.impl;
 
-import com.example.Entries_Project.mapper.EntryMapper;
-import com.example.Entries_Project.entity.Entry;
-import com.example.Entries_Project.entity.Image;
 import com.example.Entries_Project.dto.entry.EntryRequest;
 import com.example.Entries_Project.dto.entry.EntryResponse;
+import com.example.Entries_Project.entity.Audio;
+import com.example.Entries_Project.entity.Entry;
+import com.example.Entries_Project.entity.Image;
+import com.example.Entries_Project.mapper.EntryMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class EntryMapperImpl implements EntryMapper {
         entry.setTitle(request.getTitle());
         entry.setSummary(request.getSummary());
         entry.setDate(LocalDate.now());
+        entry.setReminder(request.getReminder());
         return entry;
     }
 
@@ -28,13 +30,24 @@ public class EntryMapperImpl implements EntryMapper {
         response.setId(entry.getId());
         response.setTittle(entry.getTitle());
         response.setSummary(entry.getSummary());
+        response.setReminder(entry.getReminder());
         response.setDate(entry.getDate());
 
         List<String> imagesPath = new ArrayList<>();
-        for (Image image : entry.getImages()) {
-            imagesPath.add(image.getPath());
+        if (entry.getImages() != null) {
+            for (Image image : entry.getImages()) {
+                imagesPath.add(image.getPath());
+            }
         }
         response.setImages(imagesPath);
+
+        List<String> audiosPath = new ArrayList<>();
+        if (entry.getAudioList() != null) {
+            for (Audio audio : entry.getAudioList()) {
+                audiosPath.add(audio.getPath());
+            }
+        }
+        response.setAudios(audiosPath);
         return response;
     }
 

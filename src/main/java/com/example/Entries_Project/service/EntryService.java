@@ -11,5 +11,6 @@ public interface EntryService {
     EntryResponse addEntry(EntryRequest entryRequest, List<MultipartFile> images, String token);
     EntryResponse updateEntry(EntryRequest entryRequest, String token, Long id);
     EntryResponse getEntry(Long id);
+    EntryResponse addAudio(List<MultipartFile> audios, String token, Long id);
     void deleteEntry(Long id, String token);
 }

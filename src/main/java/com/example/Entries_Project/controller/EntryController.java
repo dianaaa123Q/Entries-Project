@@ -29,6 +29,15 @@ public class EntryController {
         return entryService.addEntry(request, images, token);
     }
 
+    @PutMapping("/add-audio/{id}")
+    public EntryResponse addAudio(
+            @RequestPart List<MultipartFile> audios,
+            @RequestHeader("Authorization") String token,
+            @PathVariable Long id
+    ) {
+        return entryService.addAudio(audios, token, id);
+    }
+
     @PutMapping("/{id}")
     public EntryResponse updateEntry(
             @RequestBody EntryRequest entryRequest,

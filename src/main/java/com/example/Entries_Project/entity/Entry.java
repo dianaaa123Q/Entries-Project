@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,13 @@ public class Entry {
     private String title;
     private LocalDate date;
     private String summary;
+    private LocalDateTime reminder;
 
     @OneToMany(mappedBy = "entry")
     private List<Image> images;
+
+    @OneToMany(mappedBy = "entry")
+    private List<Audio> audioList;
 
     @ManyToOne
     @JoinColumn
